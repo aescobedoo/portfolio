@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Grow.Net app</title>
+    <link rel="stylesheet" href="LandingStyleV2.css"/>
+</head>
+<body>
+    <div class="container">
+        <div id="navbar">
+            <img src="fotos/24.png" id="logo">
+            <nav>
+                <ul id="menuList">
+                    <li><a href="">Pricing</a></li>
+                    <li><a href="">Clients</a></li>
+                    <li><a href="">About us</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </nav>
+            <img src="fotos/23.png" id="menu-icon" onclick="togglemenu()">
+        </div>
+        <div id="smoke" onclick="togglemenu()"></div>
+        <div class="row">
+             <div class="col-1">
+                <a href=""><p>Change your social life <b>TODAY</b>!</p></a>
+                <h2>Meet the people you want to become</h2>
+                <p>
+                The only place you need to find the people you really want to be sorrounded with.
+                Know people that can help you achieve your goals, while you help them.
+                </p>
+            </div>
+            <div class="col-2">
+                <img src="fotos/21.png" class="img-1">
+            </div>
+        </div>
+        <div class="row2">
+            <div class="col-1-2">
+                <img src="fotos/17.png" class="img-1">
+            </div>
+            <div class="col-2-2">
+                <p>Among 100,000 users in Mexico and USA</p>
+                <h2>With 20,000+ 5-star reviews online</h2>
+                <p>
+                    Give yourself the chance to hang out with people that really contribute to your vision,
+                    align with your values, pursue similar goals, have the same interests, and more.
+                </p>
+            </div>
+        </div>
+        <div id="bottom">
+            <div class="bspace-1">
+                <a href=""><img src="fotos/25.png"></a>
+                <a href=""><img src="fotos/26.png"></a>
+                <a href=""><img src="fotos/27.png"></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        var menuList = document.getElementById("menuList");
+        var navbar = document.getElementById("navbar");
+
+        menuList.style.maxHeight = "0px";
+
+        function togglemenu(){
+            if (menuList.style.maxHeight === "0px")
+                {
+                    menuList.style.maxHeight = "130px";
+                    smoke.style.opacity = "1";
+                    smoke.style.left = "0px"
+                }
+            else 
+                {
+                    menuList.style.maxHeight = "0px";
+                    smoke.style.opacity = "0";
+                    smoke.style.left = "-9999px"
+                }
+        }
+
+        // Add an event listener for the scroll event
+        window.addEventListener("scroll", function() {
+            // Calculate 90% of the window height
+            var scrollThreshold = window.innerHeight * 0.9;
+
+            // Check if the scroll position is greater than or equal to 90% of the window height
+            if (window.scrollY >= scrollThreshold) {
+                // Add a class to change background color
+                navbar.classList.add("scrolled");
+                menuList.classList.add("scrolled");
+            } 
+            else {
+                // Remove the class if scroll position is less than 90% of the window height
+                navbar.classList.remove("scrolled");
+                menuList.classList.remove("scrolled");
+            }
+        });
+    </script>
+</body>
+</html>
