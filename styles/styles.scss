@@ -1,0 +1,81 @@
+//imports
+@import "helpers/variables";
+@import "helpers/mixins";
+@import "helpers/placeholders";
+
+//General rules
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-style: normal;
+  color: $light;
+  //border: 1px solid blueviolet;
+}
+
+html{
+  font-size: 16px;
+}
+
+body{
+  background-color: $dark;
+  color: $light;
+}
+
+//Landing Styles (Pre-scroll)
+header{
+  display: flex;
+  align-items: center;
+  .title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 95vh;
+    text-align: center;
+    transition: all .5s ease;
+    .transition{
+      text-align: center;
+      font-size: 16rem;
+      line-height: 12rem;
+      letter-spacing: -2.5rem;
+      position: relative;
+      transition: all .5s ease;
+      .letters{
+        opacity: 1;
+        transition: all .5s ease;
+      }
+      .flipped{
+        display: inline-block;
+        transition: all .5s ease;
+        position: relative;
+      }
+    }
+  }
+  .hidden{
+    display: none;
+    padding: 2rem 0;
+    ul {
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      margin-right: 50px;
+      li{
+        margin: 0 10px;
+      }
+    }
+  }
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .scrolling{
+    width: 100vw;
+    height: 300vh;
+  }
+}
+
+
