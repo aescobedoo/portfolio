@@ -1,7 +1,7 @@
 let transition = () => {
   let distance = window.scrollY;
   let totHeight = window.innerHeight
-  let threshold =  totHeight / 5;
+  let threshold =  totHeight / 10;
   let range = 150;
   let upperThreshold = threshold + range;
   let lowerThreshold = threshold - range;
@@ -36,11 +36,13 @@ let transition = () => {
     });
     // class = "flipped" mods (<em>) element
     document.querySelector('.flipped').style.transform = 'rotateY(180deg)';
-    document.querySelector('.flipped').style.left = '2.25rem';
+    document.querySelector('.flipped').style.left = '3rem';
     // class = "hidden" mods (<nav>)
     document.querySelector('.hidden').style.display = 'flex';
     // id = "instruction" (<p>)
     document.getElementById('instruction').style.display = 'none';
+    // remove event listener
+    window.removeEventListener('scroll', transition);
   } else if (distance < lowerThreshold){
     // header mods
     document.querySelector('header').style.position = 'relative';

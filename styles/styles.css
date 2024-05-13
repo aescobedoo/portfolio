@@ -1,3 +1,8 @@
+main article, main, header .hidden ul, header .title, header {
+  display: flex;
+  align-items: center;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,13 +21,7 @@ body {
   color: rgb(225, 225, 225);
 }
 
-header {
-  display: flex;
-  align-items: center;
-}
 header .title {
-  display: flex;
-  align-items: center;
   justify-content: center;
   width: 100vw;
   height: 95vh;
@@ -51,21 +50,37 @@ header .hidden {
   padding: 2rem 0;
 }
 header .hidden ul {
-  display: flex;
   list-style: none;
   justify-content: space-between;
   margin-right: 50px;
 }
 header .hidden ul li {
-  margin: 0 10px;
+  margin: 0 25px;
 }
 
 main {
+  flex-direction: column;
+}
+main article {
+  margin-top: 91px;
+  justify-content: space-evenly;
+}
+main article .text {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+}
+main article .text h2 {
+  margin-bottom: 2rem;
+}
+main article .image {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 40%;
+  overflow: hidden;
 }
-main .scrolling {
-  width: 100vw;
-  height: 300vh;
+main article .image img {
+  width: 80%;
 }

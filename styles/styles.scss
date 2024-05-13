@@ -25,11 +25,9 @@ body{
 
 //Landing Styles (Pre-scroll)
 header{
-  display: flex;
-  align-items: center;
+  @extend %flexCenter;
   .title{
-    display: flex;
-    align-items: center;
+    @extend %flexCenter;
     justify-content: center;
     width: 100vw;
     height: 95vh;
@@ -57,25 +55,43 @@ header{
     display: none;
     padding: 2rem 0;
     ul {
-      display: flex;
+      @extend %flexCenter;
       list-style: none;
       justify-content: space-between;
       margin-right: 50px;
       li{
-        margin: 0 10px;
+        margin: 0 25px;
       }
     }
   }
 }
 
 main{
-  display: flex;
+  @extend %flexCenter;
   flex-direction: column;
-  align-items: center;
-  .scrolling{
-    width: 100vw;
-    height: 300vh;
+  article{
+    margin-top: 91px;
+    @extend %flexCenter;
+    justify-content: space-evenly;
+    .text{
+      overflow: hidden;
+      h2{
+        margin-bottom: 2rem;
+      }
+      display: flex;
+      flex-direction: column;
+      width: 40%;
+    }
+    .image{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40%;
+      overflow: hidden;
+      img{
+        width: 80%;
+      }
+    }
   }
 }
-
 
