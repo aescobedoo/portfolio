@@ -21,11 +21,15 @@ html{
 body{
   background-color: $dark;
   color: $light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-//Landing Styles (Pre-scroll)
+//Landing Styles (Pre-scroll) & header/nav bar
 header{
   @extend %flexCenter;
+  background-color: transparent;
   .title{
     @extend %flexCenter;
     justify-content: center;
@@ -66,21 +70,39 @@ header{
   }
 }
 
+#instruction{
+  margin-top: -91px;
+}
+
+.toAllowScroll{
+  display: block;
+  height: 300vh;
+  width: 100vw;
+}
+
+//main content
+
 main{
-  @extend %flexCenter;
+  display: none;
+  align-items: center;
   flex-direction: column;
+  margin-top: 75vh;
   article{
-    margin-top: 91px;
     @extend %flexCenter;
     justify-content: space-evenly;
+    width: 95%;
+    margin: 3rem 0;
     .text{
       overflow: hidden;
-      h2{
-        margin-bottom: 2rem;
-      }
       display: flex;
       flex-direction: column;
       width: 40%;
+      h2{
+        margin-bottom: 2rem;
+      }
+      p{
+        line-height: 1.75rem;
+      }
     }
     .image{
       display: flex;
@@ -90,6 +112,18 @@ main{
       overflow: hidden;
       img{
         width: 80%;
+      }
+    }
+    .grid{
+      display: grid;
+      width: 40%;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      overflow: hidden;
+      place-items: center; /* Center both horizontally and vertically */
+      row-gap: 3em;
+      * {
+        font-size: 4rem;
       }
     }
   }
