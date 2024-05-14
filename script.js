@@ -1,13 +1,41 @@
+let totHeight = window.innerHeight
+let threshold =  totHeight / 10;
+let range = 100;
+let upperThreshold = threshold + range;
+let lowerThreshold = threshold - range;
+
 let transition = () => {
   let distance = window.scrollY;
-  let totHeight = window.innerHeight
-  let threshold =  totHeight / 10;
-  let range = 150;
-  let upperThreshold = threshold + range;
-  let lowerThreshold = threshold - range;
   let progress = (distance - (lowerThreshold)) / (range * 2); // Calculate progress within the range
 
-  if (distance >= lowerThreshold && distance <= upperThreshold) {
+  if (distance === 0){
+    // header mods
+    document.querySelector('header').style.position = 'relative';
+    document.querySelector('header').style.justifyContent = 'center';
+    // class = "title" mods (<div>)
+    document.querySelector('.title').style.width = '100vw';
+    document.querySelector('.title').style.height = '95vh';
+    document.querySelector('.title').style.marginLeft = '0';
+    // class = "transition" mods (<h1>)
+    document.querySelector('.transition').style.fontSize = '16rem';
+    document.querySelector('.transition').style.lineHeight = '12rem';
+    document.querySelector('.transition').style.left = '0';
+    // class = "letters" mods (<span>)
+    document.querySelectorAll('.letters').forEach(letter => {
+      letter.style.opacity = '1';
+    });
+    // class = "flipped" mods (<em>) element
+    document.querySelector('.flipped').style.transform = 'rotateY(0deg)';
+    document.querySelector('.flipped').style.left = '0';
+    // class = "hidden" mods (<nav>)
+    document.querySelector('.hidden').style.display = 'none';
+    // id = "instruction" (<p>)
+    document.getElementById('instruction').style.display = 'block';
+    // .toallowscroll 
+    document.querySelector('.toAllowScroll').style.display = 'block';
+    // main
+    document.querySelector('main').style.display = 'none';
+  } else if (distance >= lowerThreshold && distance <= upperThreshold) {
     // class = "title" mods (<div>)
     document.querySelector('.title').style.width = `${window.innerWidth - ((window.innerWidth - 50) * progress)}`;
     document.querySelector('.title').style.height = `${(totHeight * .95) - ((totHeight * .95) * progress)}`;
@@ -41,32 +69,12 @@ let transition = () => {
     document.querySelector('.hidden').style.display = 'flex';
     // id = "instruction" (<p>)
     document.getElementById('instruction').style.display = 'none';
+    // .toallowscroll 
+    document.querySelector('.toAllowScroll').style.display = 'none';
+    // main
+    document.querySelector('main').style.display = 'flex';
     // remove event listener
-    window.removeEventListener('scroll', transition);
-  } else if (distance < lowerThreshold){
-    // header mods
-    document.querySelector('header').style.position = 'relative';
-    document.querySelector('header').style.justifyContent = 'center';
-    // class = "title" mods (<div>)
-    document.querySelector('.title').style.width = '100vw';
-    document.querySelector('.title').style.height = '95vh';
-    document.querySelector('.title').style.marginLeft = '0';
-    // class = "transition" mods (<h1>)
-    document.querySelector('.transition').style.fontSize = '16rem';
-    document.querySelector('.transition').style.lineHeight = '12rem';
-    document.querySelector('.transition').style.left = '0';
-    // class = "letters" mods (<span>)
-    document.querySelectorAll('.letters').forEach(letter => {
-      letter.style.opacity = '1';
-    });
-    // class = "flipped" mods (<em>) element
-    document.querySelector('.flipped').style.transform = 'rotateY(0deg)';
-    document.querySelector('.flipped').style.left = '0';
-    // class = "hidden" mods (<nav>)
-    document.querySelector('.hidden').style.display = 'none';
-    // id = "instruction" (<p>)
-    document.getElementById('instruction').style.display = 'block';
-    
+    //window.removeEventListener('scroll', transition);
   }
 }
 
