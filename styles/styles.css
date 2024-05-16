@@ -107,6 +107,25 @@ main article .image {
 main article .image img {
   width: 80%;
 }
+main article .image ul {
+  width: 100%;
+}
+main article .image ul li {
+  width: 100%;
+  margin: 2rem 0;
+}
+main article .image ul li .projectName {
+  cursor: pointer;
+}
+main article .image ul li div {
+  display: none;
+  width: 100%;
+  margin-top: 1rem;
+}
+main article .image ul li div iframe {
+  width: 100%;
+  height: 60vh;
+}
 main article .grid {
   display: grid;
   width: 40%;

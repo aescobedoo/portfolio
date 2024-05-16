@@ -78,4 +78,15 @@ let transition = () => {
   }
 }
 
+//Event handlers
 window.addEventListener('scroll', transition);
+document.querySelectorAll('.projectName').forEach(function(element) {
+  element.addEventListener('click', function() {
+    // Find the closest child 'div'
+    const childDiv = element.parentElement.querySelector('div');
+    if (childDiv) { // Check if a child 'div' exists
+      childDiv.style.display = childDiv.style.display === 'none' ? 'block' : 'none';
+    }
+  });
+});
+
