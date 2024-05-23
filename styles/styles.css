@@ -58,10 +58,13 @@ header .hidden {
 header .hidden ul {
   list-style: none;
   justify-content: space-between;
-  margin-right: 50px;
 }
 header .hidden ul li {
   margin: 0 25px;
+}
+
+#displayMenu, #smoke {
+  display: none;
 }
 
 #instruction {
@@ -137,4 +140,132 @@ main article .grid {
 }
 main article .grid * {
   font-size: 4rem;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 5vw;
+  margin-bottom: 5vh;
+}
+footer div {
+  padding: 0 5vw;
+}
+footer div h3 {
+  font-size: 1.25rem;
+}
+footer div ul {
+  list-style: none;
+}
+
+@media only screen and (max-width: 436px) {
+  header {
+    height: 10vh;
+    justify-content: space-around;
+  }
+  header .hidden {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  header .hidden #toggle {
+    font-size: 2rem;
+  }
+  .toAllowScroll {
+    display: none;
+  }
+  #displayMenu {
+    transition: all 0.5 ease;
+    position: fixed;
+    flex-direction: column;
+    z-index: 3;
+    right: 0;
+    top: 0;
+    width: 30vw;
+    height: 150vh;
+    background-color: rgb(30, 30, 30);
+    padding: 1rem;
+    display: none;
+  }
+  #displayMenu i {
+    position: relative;
+    top: 3vh;
+    right: 5vw;
+    text-align: right;
+    font-size: 2rem;
+  }
+  #displayMenu ul {
+    position: relative;
+    list-style: none;
+    margin-top: 6vh;
+  }
+  #displayMenu ul li {
+    margin-top: 1.5rem;
+  }
+  #smoke {
+    transition: all 0.5 ease;
+    position: fixed;
+    width: 200vw;
+    height: 200vh;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.7;
+    display: none;
+  }
+  main {
+    margin-top: 10vh;
+    width: 95%;
+  }
+  main article {
+    margin: 5vh;
+    flex-direction: column;
+  }
+  main article .text {
+    width: 100%;
+  }
+  main article .text h2 {
+    margin-bottom: 2rem;
+  }
+  main article .text p {
+    line-height: 1.75rem;
+  }
+  main article .image {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  main article .image img {
+    width: 100%;
+    margin-top: 1rem;
+  }
+  main article .image ul {
+    width: 100%;
+  }
+  main article .image ul li {
+    width: 100%;
+  }
+  main article .image ul li div {
+    display: none;
+    width: 100%;
+    margin-top: 1rem;
+  }
+  main article .image ul li div iframe {
+    height: 50vh;
+  }
+  main #skills {
+    flex-direction: column-reverse;
+  }
+  main #skills #gridOfSkills {
+    margin-top: 3rem;
+    width: 100%;
+  }
+  main #skills #gridOfSkills > * {
+    font-size: 2rem;
+  }
+  footer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  footer #location {
+    display: none;
+  }
 }
