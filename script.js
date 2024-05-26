@@ -1,3 +1,5 @@
+import createStylesfromObj from './modules/utilities.js';
+
 // DOM elements
 let header = document.querySelector('header');
 let title = document.getElementById('title');
@@ -48,18 +50,6 @@ let mainChanges = {
 }
 
 let allObjects = [headerChanges, titleChanges, transitionChanges, flippedChanges, hiddenChanges, instructionChanges, toAllowScrollChanges, mainChanges];
-
-const createStylesfromObj = (DOMelement, obj) => {
-  if (DOMelement) {
-    let keys = Object.keys(obj); // Get the keys of the object
-    for (let i = 0; i < keys.length; i++) {
-      let property = keys[i];
-      DOMelement.style[property] = obj[property];
-    }
-  } else {
-    console.warn('DOM element not found:', DOMelement);
-  }
-};
 
 let master = () => {
   let applyStylesBasedOnWidth = () => {
