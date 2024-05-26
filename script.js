@@ -1,70 +1,211 @@
-document.addEventListener('DOMContentLoaded', function() {
-  function applyStylesBasedOnWidth() {
-    let totHeight = document.documentElement.clientHeight;
-    let threshold = totHeight / 10;
+// DOM elements
+let header = document.querySelector('header');
+let title = document.getElementById('title');
+let transition = document.getElementById('logo');
+let letters = document.querySelectorAll('.letters');
+let flipped = document.getElementById('flipped');
+let instruction = document.getElementById('instruction');
+let toAllowScroll = document.getElementById('toAllowScr');
+let main = document.querySelector('main');
+let hidden = document.getElementById('hidden');
+
+let allDOM = [header, title, transition, flipped, hidden, instruction, toAllowScroll, main];
+
+// Objects for DOM elements:
+let headerChanges = {
+  position: 'relative',
+  justifyContent: 'center',
+  display: 'flex'
+};
+let titleChanges = {
+  width: '100vw',
+  height: '95vh',
+  marginLeft: '0'
+}
+let transitionChanges = {
+  fontSize: '16rem',
+  lineHeight: '12rem',
+  left: '0'
+}
+let letterChanges = {
+  opacity: '1'
+}
+let flippedChanges = {
+  transform: 'rotateY(0deg)',
+  left: '0'
+}
+let hiddenChanges = {
+  display: 'none'
+}
+let instructionChanges = {
+  display: 'block'
+}
+let toAllowScrollChanges = {
+  display: 'block'
+}
+let mainChanges = {
+  display: 'none'
+}
+
+let allObjects = [headerChanges, titleChanges, transitionChanges, flippedChanges, hiddenChanges, instructionChanges, toAllowScrollChanges, mainChanges];
+
+const createStylesfromObj = (DOMelement, obj) => {
+  if (DOMelement) {
+    let keys = Object.keys(obj); // Get the keys of the object
+    for (let i = 0; i < keys.length; i++) {
+      let property = keys[i];
+      DOMelement.style[property] = obj[property];
+    }
+  } else {
+    console.warn('DOM element not found:', DOMelement);
+  }
+};
+
+let master = () => {
+  let applyStylesBasedOnWidth = () => {
+    let height = document.documentElement.clientHeight;
+    let threshold = height / 20;
     let range = 100;
     let upperThreshold = threshold + range;
     let lowerThreshold = threshold - range;
 
-    function transition() {
+    const transitions = () => {
       let distance = window.scrollY;
-      let progress = (distance - lowerThreshold) / (range * 2); // Calculate progress within the range
+      let progress = (distance - lowerThreshold) / (range * 2);
 
-      if (distance === 0) {
-        // Landing styles
-        document.querySelector('header').style.position = 'relative';
-        document.querySelector('header').style.justifyContent = 'center';
-        document.querySelector('.title').style.width = '100vw';
-        document.querySelector('.title').style.height = '95vh';
-        document.querySelector('.title').style.marginLeft = '0';
-        document.querySelector('.transition').style.fontSize = '16rem';
-        document.querySelector('.transition').style.lineHeight = '12rem';
-        document.querySelector('.transition').style.left = '0';
-        document.querySelectorAll('.letters').forEach(letter => {
-          letter.style.opacity = '1';
-        });
-        document.querySelector('.flipped').style.transform = 'rotateY(0deg)';
-        document.querySelector('.flipped').style.left = '0';
-        document.querySelector('.hidden').style.display = 'none';
-        document.getElementById('instruction').style.display = 'block';
-        document.querySelector('.toAllowScroll').style.display = 'block';
-        document.querySelector('main').style.display = 'none';
-      } else if (distance >= lowerThreshold && distance <= upperThreshold) {
-        // Smooth animation
-        document.querySelector('.title').style.width = `${window.innerWidth - ((window.innerWidth - 50) * progress)}`;
-        document.querySelector('.title').style.height = `${(totHeight * .95) - ((totHeight * .95) * progress)}`;
-        document.getElementsByClassName('transition')[0].style.fontSize = `${16 - (15.5 * progress)}rem`;
-        document.querySelectorAll('.letters').forEach(letter => {
-          letter.style.opacity = `${1 - progress}`;
-        });
-      } else if (distance > upperThreshold) {
-        // Final stage
-        document.querySelector('nav.hidden ul').innerHTML = '<li><a href="#gridOfSkills">Skills</a></li><li><a href="">Projects</a></li><li><a href="">Contact</a></li>';
-        document.querySelector('header').style.position = 'fixed';
-        document.querySelector('header').style.width = '100vw';
-        document.querySelector('header').style.justifyContent = 'space-between';
-        document.querySelector('.title').style.width = '50px';
-        document.querySelector('.title').style.height = '50px';
-        document.querySelector('.title').style.marginLeft = '1.8vw';
-        document.querySelector('.transition').style.fontSize = '2rem';
-        document.querySelector('.transition').style.lineHeight = '1.5rem';
-        document.querySelector('.transition').style.left = '-1.5rem';
-        document.querySelectorAll('.letters').forEach(letter => {
-          letter.style.opacity = '0';
-        });
-        document.querySelector('.flipped').style.transform = 'rotateY(180deg)';
-        document.querySelector('.flipped').style.left = '3rem';
-        document.querySelector('.hidden').style.display = 'flex';
-        document.querySelector('.hidden').style.marginRight = '1.8vw';
-        document.getElementById('instruction').style.display = 'none';
-        document.querySelector('.toAllowScroll').style.display = 'none';
-        document.querySelector('main').style.display = 'flex';
+      if (document.documentElement.clientWidth <= 436) {
+        headerChanges['position'] = 'fixed';
+        headerChanges['width'] = '100vw';
+        headerChanges['justifyContent'] = 'space-between';
+        headerChanges['backgroundColor'] = 'rgb(30, 30, 30)';
+        titleChanges['width'] = '50px';
+        titleChanges['height'] = '50px';
+        titleChanges['marginLeft'] = '10vw';
+        transitionChanges['fontSize'] = '2rem';
+        transitionChanges['lineHeight'] = '1.5rem';
+        transitionChanges['left'] = '-1.5rem';
+        letterChanges['opacity'] = '0';
+        flippedChanges['transform'] = 'rotateY(180deg)';
+        flippedChanges['left'] = '3rem';
+        hiddenChanges['display'] = 'flex';
+        hiddenChanges['marginRight'] = '10vw';
+        instructionChanges['display'] = 'none';
+        toAllowScrollChanges['display'] = 'none';
+        mainChanges['display'] = 'flex';
+        letterChanges['opacity'] = '0';
+  
+        document.querySelector('nav.hidden ul').innerHTML = '<i class="fa-solid fa-bars" id="toggle"></i>';
+        document.querySelector('nav.hidden ul').style.marginRight = '10vw';
+  
+        for (let i = 0; i < allDOM.length; i++) {
+          createStylesfromObj(allDOM[i], allObjects[i]);
+        }
+        letters.forEach(letter => {
+          createStylesfromObj(letter, letterChanges);
+        });  
+      } else {
+        document.querySelector('nav.hidden ul').innerHTML = '<li><a href="#gridOfSkills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li>';
+
+        if (distance === 0) {
+          headerChanges['position'] = 'relative';
+          headerChanges['justifyContent'] = 'center';
+          titleChanges['width'] = '100vw';
+          titleChanges['height'] = '95vh';
+          titleChanges['marginLeft'] = '0';
+          transitionChanges['fontSize'] = '16rem';
+          transitionChanges['lineHeight'] = '12rem';
+          transitionChanges['left'] = '0';
+          letterChanges['opacity'] = '1';
+          flippedChanges['transform'] = 'rotateY(0deg)';
+          flippedChanges['left'] = '0';
+          hiddenChanges['display'] = 'none';
+          instructionChanges['display'] = 'block';
+          toAllowScrollChanges['display'] = 'block';
+          mainChanges['display'] = 'none';
+  
+          for (let i = 0; i < allDOM.length; i++) {
+            createStylesfromObj(allDOM[i], allObjects[i]);
+          }
+          letters.forEach(letter => {
+            createStylesfromObj(letter, letterChanges);
+          });
+        } else if (distance >= lowerThreshold && distance <= upperThreshold) {
+          // Define styles during transition
+          titleChanges['width'] = `${window.innerWidth - ((window.innerWidth - 50) * progress)}px`;
+          titleChanges['height'] = `${(height * 0.95) - ((height * 0.95) * progress)}px`;
+          transitionChanges['fontSize'] = `${16 - (15.5 * progress)}rem`;
+          letterChanges['opacity'] = `${1 - progress}`;
+  
+          for (let i = 0; i < allDOM.length; i++) {
+            createStylesfromObj(allDOM[i], allObjects[i]);
+          }
+          letters.forEach(letter => {
+            createStylesfromObj(letter, letterChanges);
+          });
+        } else if (distance > upperThreshold) {
+          // Changes for header
+          headerChanges['position'] = 'fixed';
+          headerChanges['width'] = '100vw';
+          headerChanges['justifyContent'] = 'space-between';
+          titleChanges['width'] = '50px';
+          titleChanges['height'] = '50px';
+          titleChanges['marginLeft'] = '1.8vw';
+          transitionChanges['fontSize'] = '2rem';
+          transitionChanges['lineHeight'] = '1.5rem';
+          transitionChanges['left'] = '-1.5rem';
+          letterChanges['opacity'] = '0';
+          flippedChanges['transform'] = 'rotateY(180deg)';
+          flippedChanges['left'] = '3rem';
+          hiddenChanges['display'] = 'flex';
+          hiddenChanges['marginRight'] = '1.8vw';
+          instructionChanges['display'] = 'none';
+          toAllowScrollChanges['display'] = 'none';
+          mainChanges['display'] = 'flex';
+  
+          for (let i = 0; i < allDOM.length; i++) {
+            createStylesfromObj(allDOM[i], allObjects[i]);
+  
+          }
+          letters.forEach(letter => {
+            createStylesfromObj(letter, letterChanges);
+          });
+        }  
       }
     }
 
-    if (document.documentElement.clientWidth >= 436) {
-      // Add scroll event listener
-      window.addEventListener('scroll', transition);
+    transitions();
+
+    if (document.documentElement.clientWidth <= 436) {
+      
+      let toggler = document.getElementById('toggle');
+      let toggleMenu = document.getElementById('displayMenu');
+      let screenCover = document.getElementById('smoke');
+      let xmark = document.getElementById('xMark');  
+
+      window.removeEventListener('scroll', transitions);
+
+      function displayMenu() {
+        if (toggleMenu.style.display === 'none' || toggleMenu.style.display === '') {
+          toggleMenu.style.display = 'flex';
+          screenCover.style.display = 'block';
+        } else {
+          toggleMenu.style.display = 'none';
+          screenCover.style.display = 'none';
+        }
+      }
+    
+      if (toggler) {
+        toggler.addEventListener('click', displayMenu);
+      }
+      if (screenCover) {
+        screenCover.addEventListener('click', displayMenu);
+      }
+      if (xmark) {
+        xmark.addEventListener('click', displayMenu);
+      }
+      document.querySelectorAll('#displayMenu li').forEach(item => {
+        item.addEventListener('click', displayMenu);
+      });  
 
       document.querySelectorAll('.projectName').forEach(function(element) {
         element.addEventListener('click', function() {
@@ -72,82 +213,20 @@ document.addEventListener('DOMContentLoaded', function() {
           let childDiv = element.parentElement.querySelector('.project');
           childDiv.style.display = childDiv.style.display === 'none' ? 'block' : 'none';
         });
-      });
+      });  
+      
+    } else {
+      // Add scroll event listener
+      window.addEventListener('scroll', transitions);
 
       // Apply transition on load if already scrolled
-      transition();
-      
-      // Make header visible
-      document.querySelector('header').style.display = 'flex';
-    } else {
-      window.removeEventListener('scroll', transition);
-      
-       document.querySelector('header').style.position = 'fixed';
-       document.querySelector('header').style.width = '100vw';
-       document.querySelector('header').style.justifyContent = 'space-between';
-       document.querySelector('header').style.backgroundColor = 'rgb(30, 30, 30)';
-       document.querySelector('.title').style.width = '50px';
-       document.querySelector('.title').style.height = '50px';
-       document.querySelector('.title').style.marginLeft = '10vw';
-       document.querySelector('.transition').style.fontSize = '2rem';
-       document.querySelector('.transition').style.lineHeight = '1.5rem';
-       document.querySelector('.transition').style.left = '-1.5rem';
-       document.querySelectorAll('.letters').forEach(letter => {
-         letter.style.opacity = '0';
-       });
-       document.querySelector('.flipped').style.transform = 'rotateY(180deg)';
-       document.querySelector('.flipped').style.left = '3rem';
-       document.querySelector('.hidden').style.display = 'flex';
-
-       document.getElementById('instruction').style.display = 'none';
-       document.querySelector('.toAllowScroll').style.display = 'none';
-       document.querySelector('main').style.display = 'flex';
-
-       document.querySelector('nav.hidden ul').innerHTML = '<i class="fa-solid fa-bars" id="toggle"></i>';
-       document.querySelector('nav.hidden ul').style.marginRight = '10vw';
-
-       document.querySelectorAll('.projectName').forEach(function(element) {
-        element.addEventListener('click', function() {
-          // Find the closest child 'div'
-          let childDiv = element.parentElement.querySelector('.project');
-          childDiv.style.display = childDiv.style.display === 'none' ? 'block' : 'none';
-        });
-      });
+      transitions();
     }
+
   }
 
-  // Initial check
   applyStylesBasedOnWidth();
-
-  // Check on window resize
   window.addEventListener('resize', applyStylesBasedOnWidth);
+};
 
-    // Mobile menu toggling
-    let toggler = document.getElementById('toggle');
-    let toggleMenu = document.getElementById('displayMenu');
-    let screenCover = document.getElementById('smoke');
-    let xmark = document.getElementById('xMark');
-  
-    function displayMenu() {
-      if (toggleMenu.style.display === 'none' || toggleMenu.style.display === '') {
-        toggleMenu.style.display = 'flex';
-        screenCover.style.display = 'block';
-      } else {
-        toggleMenu.style.display = 'none';
-        screenCover.style.display = 'none';
-      }
-    }
-  
-    if (toggler) {
-      toggler.addEventListener('click', displayMenu);
-    }
-    if (screenCover) {
-      screenCover.addEventListener('click', displayMenu);
-    }
-    if (xmark) {
-      xmark.addEventListener('click', displayMenu);
-    }
-    document.querySelectorAll('#displayMenu li').forEach(item => {
-      item.addEventListener('click', displayMenu);
-    });
-});
+document.addEventListener('DOMContentLoaded', master);
